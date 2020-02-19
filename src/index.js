@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Scope} from '@unform/core';
+import {Form} from '@unform/mobile';
 
-import Form from './components/Form';
 import Input from './components/Input';
 
 export default function App() {
@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Form reference={formRef} onSubmit={handleSubmit}>
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
           autoCorrect={false}
           name="email"
