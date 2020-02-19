@@ -53,7 +53,14 @@ export default function App() {
             returnKeyType="next"
             onSubmitEditing={() => focusNextInput('address.zipcode')}
           />
-          <Input name="zipcode" label="ZIP code" keyboardType="number-pad" />
+
+          <Input
+            name="zipcode"
+            label="ZIP code"
+            keyboardType="number-pad"
+            returnKeyType="done"
+            onSubmitEditing={() => formRef.current.submitForm()}
+          />
         </Scope>
 
         <TouchableOpacity onPress={() => formRef.current.submitForm()}>
