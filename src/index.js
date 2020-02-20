@@ -9,15 +9,47 @@ import {
 import {Scope} from '@unform/core';
 import {Form} from '@unform/mobile';
 
+import Yup from './config/yup';
+
 import Input from './components/Input';
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email()
+    .required(),
+  password: Yup.string().required(),
+  documents: Yup.object().shape({
+    birthday: Yup.string().required(),
+    cpf: Yup.string()
+      .required()
+      .cpf(),
+  }),
+});
 
 export default function App() {
   const formRef = useRef(null);
 
-  const handleSubmit = useCallback((data, {reset}) => {
-    Alert.alert(JSON.stringify(data));
+  const handleSubmit = useCallback(async (data, {reset}) => {
+    try {
+      formRef.current.setErrors({});
 
-    reset();
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      Alert.alert(JSON.stringify(data));
+
+      reset();
+    } catch (err) {
+      Alert.alert(JSON.stringify(err));
+      const validationErrors = {};
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach(error => {
+          validationErrors[error.path] = error.message;
+        });
+        formRef.current.setErrors(validationErrors);
+      }
+    }
   }, []);
 
   const focusNextInput = useCallback(inputName => {
@@ -26,37 +58,38 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <Form ref={formRef} schema={schema} onSubmit={handleSubmit}>
         <Input
           autoCorrect={false}
           name="email"
-          label="E-mail"
+          placeholder="E-mail"
           autoCapitalize="none"
           keyboardType="email-address"
           returnKeyType="next"
-          onSubmitEditing={() => focusNextInput('name')}
+          onSubmitEditing={() => focusNextInput('password')}
         />
 
         <Input
+          secureTextEntry
           autoCorrect={false}
-          name="name"
-          label="Name"
-          autoCapitalize="words"
+          name="password"
+          placeholder="Password"
           returnKeyType="next"
-          onSubmitEditing={() => focusNextInput('address.street')}
+          onSubmitEditing={() => focusNextInput('documents.cpf')}
         />
 
-        <Scope path="address">
+        <Scope path="documents">
           <Input
-            name="street"
-            label="Street name"
+            name="cpf"
+            placeholder="User's CPF"
+            keyboardType="number-pad"
             returnKeyType="next"
-            onSubmitEditing={() => focusNextInput('address.zipcode')}
+            onSubmitEditing={() => focusNextInput('documents.birthday')}
           />
 
           <Input
-            name="zipcode"
-            label="ZIP code"
+            name="birthday"
+            placeholder="User's birthday"
             keyboardType="number-pad"
             returnKeyType="done"
             onSubmitEditing={() => formRef.current.submitForm()}
