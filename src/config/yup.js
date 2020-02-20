@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import CPF from 'gerador-validador-cpf';
+import * as CPF from 'gerador-validador-cpf';
 
 Yup.setLocale({
   mixed: {
