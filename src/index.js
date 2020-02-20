@@ -12,6 +12,7 @@ import {Form} from '@unform/mobile';
 import Yup from './config/yup';
 
 import Input from './components/Input';
+import MaskedInput from './components/MaskedInput';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -37,6 +38,8 @@ export default function App() {
         abortEarly: false,
       });
 
+      Alert.alert(JSON.stringify(data));
+
       reset();
     } catch (err) {
       const errors = {};
@@ -52,7 +55,15 @@ export default function App() {
   }, []);
 
   const focusNextInput = useCallback(inputName => {
-    formRef.current.getFieldRef(inputName).focus();
+    const inputRef = formRef.current.getFieldRef(inputName);
+
+    // To handle MaskedInput the same way TextInput, we need to check the props to get the
+    // _inputElement's reference.
+    if ('type' in inputRef.props) {
+      formRef.current.getFieldRef(inputName)._inputElement.focus();
+    } else {
+      formRef.current.getFieldRef(inputName).focus();
+    }
   }, []);
 
   return (
@@ -78,7 +89,8 @@ export default function App() {
         />
 
         <Scope path="documents">
-          <Input
+          <MaskedInput
+            mask="cpf"
             name="cpf"
             placeholder="User's CPF"
             keyboardType="number-pad"
@@ -86,11 +98,15 @@ export default function App() {
             onSubmitEditing={() => focusNextInput('documents.birthday')}
           />
 
-          <Input
+          <MaskedInput
+            mask="datetime"
             name="birthday"
             placeholder="User's birthday"
             keyboardType="number-pad"
             returnKeyType="done"
+            options={{
+              format: 'DD/MM/YYYY',
+            }}
             onSubmitEditing={() => formRef.current.submitForm()}
           />
         </Scope>
