@@ -1,8 +1,8 @@
 import React, {useRef, useEffect} from 'react';
-import {Text, TextInput, StyleSheet} from 'react-native';
+import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {useField} from '@unform/core';
 
-function Input({name, label, ...rest}) {
+function Input({name, label, placeholder, ...rest}) {
   const inputRef = useRef(null);
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
 
@@ -26,35 +26,40 @@ function Input({name, label, ...rest}) {
   }, [fieldName, registerField]);
 
   return (
-    <>
-      {label && <Text style={styles.label}>{label}</Text>}
-
+    <View style={styles.container}>
       <TextInput
         style={styles.input}
         ref={inputRef}
+        placeholder={placeholder}
         defaultValue={defaultValue}
         {...rest}
       />
-    </>
+
+      {error && <Text style={styles.error}>{error}</Text>}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  label: {
-    fontWeight: 'bold',
-    marginBottom: 5,
+  container: {
+    flexDirection: 'column',
+    width: '100%',
   },
 
   input: {
-    marginBottom: 15,
-    paddingHorizontal: 12,
-    paddingVertical: 16,
     borderRadius: 4,
     borderWidth: 2,
     borderColor: '#ddd',
-    fontSize: 15,
     color: '#444',
-    width: '100%',
+    fontSize: 15,
+    marginBottom: 15,
+    paddingHorizontal: 12,
+    paddingVertical: 16,
+  },
+
+  error: {
+    color: '#f00',
+    fontSize: 15,
   },
 });
 
