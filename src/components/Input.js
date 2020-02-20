@@ -28,7 +28,7 @@ function Input({name, label, placeholder, ...rest}) {
   return (
     <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={error ? styles.inputError : styles.input}
         ref={inputRef}
         placeholder={placeholder}
         defaultValue={defaultValue}
@@ -43,16 +43,25 @@ function Input({name, label, placeholder, ...rest}) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
+    marginBottom: 15,
     width: '100%',
   },
 
   input: {
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: '#ddd',
+    borderRadius: 5,
+    borderWidth: 1,
     color: '#444',
     fontSize: 15,
-    marginBottom: 15,
+    paddingHorizontal: 12,
+    paddingVertical: 16,
+  },
+
+  inputError: {
+    borderColor: '#f00',
+    borderRadius: 5,
+    borderWidth: 1,
+    color: '#444',
+    fontSize: 15,
     paddingHorizontal: 12,
     paddingVertical: 16,
   },
@@ -60,6 +69,7 @@ const styles = StyleSheet.create({
   error: {
     color: '#f00',
     fontSize: 15,
+    marginTop: 5,
   },
 });
 
