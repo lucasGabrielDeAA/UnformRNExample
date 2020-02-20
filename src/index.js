@@ -6,9 +6,9 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+
 import {Scope} from '@unform/core';
 import {Form} from '@unform/mobile';
-
 import Yup from './config/yup';
 
 import Input from './components/Input';
@@ -21,8 +21,8 @@ const schema = Yup.object().shape({
   documents: Yup.object().shape({
     birthday: Yup.string().required(),
     cpf: Yup.string()
-      .required()
-      .cpf(),
+      .cpf()
+      .required(),
   }),
 });
 
@@ -37,17 +37,16 @@ export default function App() {
         abortEarly: false,
       });
 
-      Alert.alert(JSON.stringify(data));
-
       reset();
     } catch (err) {
-      Alert.alert(JSON.stringify(err));
-      const validationErrors = {};
+      const errors = {};
+
       if (err instanceof Yup.ValidationError) {
-        err.inner.forEach(error => {
-          validationErrors[error.path] = error.message;
+        err.inner.map(error => {
+          errors[error.path] = error.message;
         });
-        formRef.current.setErrors(validationErrors);
+
+        formRef.current.setErrors(errors);
       }
     }
   }, []);
@@ -58,7 +57,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Form ref={formRef} schema={schema} onSubmit={handleSubmit}>
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
           autoCorrect={false}
           name="email"
@@ -83,7 +82,7 @@ export default function App() {
             name="cpf"
             placeholder="User's CPF"
             keyboardType="number-pad"
-            returnKeyType="next"
+            returnKeyType="done"
             onSubmitEditing={() => focusNextInput('documents.birthday')}
           />
 
