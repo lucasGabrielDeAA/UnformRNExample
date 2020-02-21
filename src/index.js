@@ -55,15 +55,7 @@ export default function App() {
   }, []);
 
   const focusNextInput = useCallback(inputName => {
-    const inputRef = formRef.current.getFieldRef(inputName);
-
-    // To handle MaskedInput the same way TextInput, we need to check the props to get the
-    // _inputElement's reference.
-    if ('type' in inputRef.props) {
-      formRef.current.getFieldRef(inputName)._inputElement.focus();
-    } else {
-      formRef.current.getFieldRef(inputName).focus();
-    }
+    formRef.current.getFieldRef(inputName).focus();
   }, []);
 
   return (
