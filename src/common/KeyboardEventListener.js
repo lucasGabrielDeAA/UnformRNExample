@@ -13,7 +13,12 @@ export default function KeyboardEventListener({callback, children}) {
     }
 
     return () => {
-      Keyboard.removeAllListeners();
+      if (Platform.OS === 'ios') {
+        Keyboard.removeListener('keyboardWillChangeFrame');
+      } else {
+        Keyboard.removeListener('keyboardDidShow');
+        Keyboard.removeListener('keyboardDidHide');
+      }
     };
   }, []);
 
