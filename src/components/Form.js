@@ -45,11 +45,11 @@ export default function Form({
 
   return (
     <ScrollView
+      scrollEnabled={debouncedKeyboard > 0}
       showsVerticalScrollIndicator={false}
       ref={scrollRef}
       style={styles.content}
       contentContainerStyle={{
-        ...styles.contentContainer,
         paddingBottom: debouncedKeyboard,
       }}
       onScroll={handleScroll}>
@@ -69,8 +69,5 @@ export default function Form({
 const styles = StyleSheet.create({
   content: {
     width: '100%',
-  },
-  contentContainer: {
-    paddingTop: 500,
   },
 });
