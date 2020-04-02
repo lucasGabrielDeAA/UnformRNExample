@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 
 export default function Routes() {
   return (
-    <Stack.Navigator initialRouteName="Submit">
+    <Stack.Navigator initialRouteName="Submit" headerMode="none">
       <Stack.Screen name="Submit" component={Submit} />
       <Stack.Screen name="CreatePost" component={CreatePost} />
     </Stack.Navigator>
