@@ -4,21 +4,22 @@ import {ScrollView, StyleSheet} from 'react-native';
 import {Form as CustomForm} from '@unform/mobile';
 
 import KeyboardEventListener from '../common/KeyboardEventListener';
+import useDebounce from '../common/useDebounce';
 
-const styles = StyleSheet.create({
-  content: {
-    width: '100%',
-  },
-  contentContainer: {
-    paddingTop: 500,
-  },
-});
-
-export default function Form({handleSubmit, children, inputSelected, formRef}) {
+export default function Form({
+  handleSubmit,
+  children,
+  inputSelected,
+  formRef,
+  initialData,
+  schema,
+}) {
   const scrollRef = useRef(null);
 
   const [offset, setOffset] = useState(0);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  const debouncedKeyboard = useDebounce(keyboardHeight, 300);
 
   useEffect(() => {
     if (inputSelected !== '' && keyboardHeight > 0) {
@@ -32,7 +33,7 @@ export default function Form({handleSubmit, children, inputSelected, formRef}) {
           });
         });
     }
-  }, [inputSelected, keyboardHeight]);
+  }, [inputSelected, debouncedKeyboard]);
 
   const handleScroll = useCallback(event => {
     setOffset(event.nativeEvent.contentOffset.y);
@@ -49,14 +50,27 @@ export default function Form({handleSubmit, children, inputSelected, formRef}) {
       style={styles.content}
       contentContainerStyle={{
         ...styles.contentContainer,
-        paddingBottom: keyboardHeight,
+        paddingBottom: debouncedKeyboard,
       }}
       onScroll={handleScroll}>
       <KeyboardEventListener callback={handleKeyboardCallback}>
-        <CustomForm ref={formRef} onSubmit={handleSubmit}>
+        <CustomForm
+          initialData={initialData}
+          schema={schema}
+          ref={formRef}
+          onSubmit={handleSubmit}>
           {children}
         </CustomForm>
       </KeyboardEventListener>
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  content: {
+    width: '100%',
+  },
+  contentContainer: {
+    paddingTop: 500,
+  },
+});
