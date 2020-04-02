@@ -1,11 +1,8 @@
 import React, {useRef, useCallback, useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  Alert,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, Image, Alert, StyleSheet, TouchableOpacity} from 'react-native';
+
+import {useNavigation} from '@react-navigation/native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {Scope} from '@unform/core';
 
@@ -31,6 +28,7 @@ const schema = Yup.object().shape({
 });
 
 export default function Submit() {
+  const navigation = useNavigation();
   const formRef = useRef(null);
 
   const [inputSelected, setInputSelected] = useState('');
@@ -79,6 +77,14 @@ export default function Submit() {
           cpf: '11111111111',
           birthday: '11111995',
         }}>
+        <Image
+          source={{
+            uri:
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
+          }}
+          resizeMode="contain"
+          style={styles.top}
+        />
         <Input
           autoCorrect={false}
           name="name"
@@ -149,6 +155,10 @@ export default function Submit() {
         <TouchableOpacity onPress={() => formRef.current.submitForm()}>
           <Text>Save</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('CreatePost')}>
+          <Text>Create post</Text>
+        </TouchableOpacity>
       </Form>
     </SafeAreaView>
   );
@@ -158,7 +168,11 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
     marginHorizontal: 15,
+  },
+  top: {
+    alignSelf: 'center',
+    height: 200,
+    width: 300,
   },
 });
