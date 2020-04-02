@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import {useField} from '@unform/core';
@@ -6,6 +6,8 @@ import {useField} from '@unform/core';
 export default function MaskedInput({name, label, placeholder, mask, ...rest}) {
   const inputRef = useRef(null);
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
+
+  const [currentValue, setCurrentValue] = useState('');
 
   useEffect(() => {
     registerField({
@@ -18,10 +20,12 @@ export default function MaskedInput({name, label, placeholder, mask, ...rest}) {
       setValue(ref, value) {
         ref.setNativeProps({text: value});
         ref._lastNativeText = value;
+        setCurrentValue(value);
       },
       clearValue(ref) {
         ref.setNativeProps({text: ''});
         ref._lastNativeText = '';
+        setCurrentValue('');
       },
     });
   }, [fieldName, registerField]);
@@ -34,7 +38,9 @@ export default function MaskedInput({name, label, placeholder, mask, ...rest}) {
         style={error ? styles.inputError : styles.input}
         ref={inputRef}
         placeholder={placeholder}
+        value={currentValue}
         defaultValue={defaultValue}
+        onChangeText={v => setCurrentValue(v)}
         {...rest}
       />
 
