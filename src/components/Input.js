@@ -2,7 +2,7 @@ import React, {useRef, useEffect} from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {useField} from '@unform/core';
 
-export default function Input({name, label, placeholder, ...rest}) {
+export default function Input({name, label, placeholder, multiline, ...rest}) {
   const inputRef = useRef(null);
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
 
@@ -28,8 +28,15 @@ export default function Input({name, label, placeholder, ...rest}) {
   return (
     <View style={styles.container}>
       <TextInput
+        multiline={multiline}
         underlineColorAndroid="transparent"
-        style={error ? styles.inputError : styles.input}
+        style={
+          error
+            ? styles.inputError
+            : multiline
+            ? styles.multiline
+            : styles.input
+        }
         ref={inputRef}
         placeholder={placeholder}
         defaultValue={defaultValue}
@@ -55,6 +62,17 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingHorizontal: 12,
     paddingVertical: 16,
+  },
+
+  multiline: {
+    borderRadius: 5,
+    borderWidth: 1,
+    color: '#444',
+    fontSize: 15,
+    height: 200,
+    paddingHorizontal: 12,
+    paddingVertical: 16,
+    textAlignVertical: 'top',
   },
 
   inputError: {
