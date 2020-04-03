@@ -1,10 +1,23 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState, useCallback} from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {useField} from '@unform/core';
 
-export default function Input({name, label, placeholder, multiline, ...rest}) {
+export default function Input({
+  name,
+  label,
+  placeholder,
+  multiline,
+  handleFocus,
+  ...rest
+}) {
   const inputRef = useRef(null);
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
+  const [active, setActive] = useState(false);
+
+  const handleInputFocus = useCallback(() => {
+    handleFocus();
+    setActive(true);
+  }, [handleFocus]);
 
   useEffect(() => {
     registerField({
@@ -40,6 +53,8 @@ export default function Input({name, label, placeholder, multiline, ...rest}) {
         ref={inputRef}
         placeholder={placeholder}
         defaultValue={defaultValue}
+        onFocus={() => handleInputFocus()}
+        onBlur={() => setActive(false)}
         {...rest}
       />
 
@@ -56,8 +71,8 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    borderRadius: 5,
-    borderWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderWidth: 0,
     color: '#444',
     fontSize: 15,
     paddingHorizontal: 12,
@@ -65,8 +80,8 @@ const styles = StyleSheet.create({
   },
 
   multiline: {
-    borderRadius: 5,
-    borderWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderWidth: 0,
     color: '#444',
     fontSize: 15,
     height: 200,
@@ -76,9 +91,9 @@ const styles = StyleSheet.create({
   },
 
   inputError: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: '#f00',
-    borderRadius: 5,
-    borderWidth: 1,
+    borderWidth: 0,
     color: '#444',
     fontSize: 15,
     paddingHorizontal: 12,
@@ -89,5 +104,15 @@ const styles = StyleSheet.create({
     color: '#f00',
     fontSize: 15,
     marginTop: 5,
+  },
+
+  active: {
+    borderBottomWidth: 1 + StyleSheet.hairlineWidth,
+    borderColor: '#0050ff',
+    borderWidth: 0,
+    color: '#444',
+    fontSize: 18,
+    paddingHorizontal: 10,
+    paddingVertical: 13,
   },
 });
