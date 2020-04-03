@@ -98,7 +98,7 @@ export default function Submit() {
           placeholder="Name"
           autoCapitalize="none"
           returnKeyType="next"
-          onFocus={() => scrollToFocusedInput('name')}
+          handleFocus={() => scrollToFocusedInput('name')}
           onSubmitEditing={() => focusNextInput('email')}
         />
 
@@ -109,7 +109,7 @@ export default function Submit() {
           autoCapitalize="none"
           keyboardType="email-address"
           returnKeyType="next"
-          onFocus={() => scrollToFocusedInput('email')}
+          handleFocus={() => scrollToFocusedInput('email')}
           onSubmitEditing={() => focusNextInput('age')}
         />
 
@@ -120,7 +120,7 @@ export default function Submit() {
           autoCapitalize="none"
           keyboardType="numeric"
           returnKeyType="done"
-          onFocus={() => scrollToFocusedInput('age')}
+          handleFocus={() => scrollToFocusedInput('age')}
           onSubmitEditing={() => focusNextInput('password')}
         />
 
@@ -130,7 +130,7 @@ export default function Submit() {
           name="password"
           placeholder="Password"
           returnKeyType="next"
-          onFocus={() => scrollToFocusedInput('password')}
+          handleFocus={() => scrollToFocusedInput('password')}
           onSubmitEditing={() => focusNextInput('documents.cpf')}
         />
 
@@ -141,7 +141,7 @@ export default function Submit() {
             placeholder="User's CPF"
             keyboardType="numeric"
             returnKeyType="done"
-            onFocus={() => scrollToFocusedInput('documents.cpf')}
+            handleFocus={() => scrollToFocusedInput('documents.cpf')}
             onSubmitEditing={() => focusNextInput('documents.birthday')}
           />
 
@@ -154,7 +154,7 @@ export default function Submit() {
             options={{
               format: 'DD/MM/YYYY',
             }}
-            onFocus={() => scrollToFocusedInput('documents.birthday')}
+            handleFocus={() => scrollToFocusedInput('documents.birthday')}
             onSubmitEditing={() => formRef.current.submitForm()}
           />
         </Scope>
