@@ -34,6 +34,5 @@ export const CustomInput = styled.TextInput`
 
 export const Error = styled.Text`
   color: #f00;
-  font-size: 15px;
-  margin-top: 5px;
+  font-size: 13px;
 `;
