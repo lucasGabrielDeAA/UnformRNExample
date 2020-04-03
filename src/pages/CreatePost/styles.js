@@ -1,7 +1,6 @@
-import {SafeAreaView} from 'react-native-safe-area-context';
 import styled, {css} from 'styled-components/native';
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled.View`
   align-items: center;
   flex: 1;
   justify-content: center;

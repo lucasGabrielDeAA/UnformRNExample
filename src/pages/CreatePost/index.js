@@ -53,6 +53,7 @@ export default function CreatePost() {
     <>
       <Container>
         <Form
+          scrollEnabled={false}
           handleKeyboardLayout={handleKeyboardLayout}
           formRef={formRef}
           handleSubmit={handleSubmit}
