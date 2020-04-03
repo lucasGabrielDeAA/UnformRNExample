@@ -9,7 +9,7 @@ import Yup from '../../config/yup';
 
 import Form from '../../components/Form';
 import Input from '../../components/Form/Input';
-import MaskedInput from '../../components/MaskedInput';
+import MaskedInput from '../../components/Form/MaskedInput';
 
 import {Container, TopImage} from './styles';
 
