@@ -15,6 +15,7 @@ export default function Form({
   initialData,
   schema,
   handleKeyboardLayout,
+  scrollEnabled,
 }) {
   const scrollRef = useRef(null);
 
@@ -51,7 +52,7 @@ export default function Form({
 
   return (
     <Container
-      scrollEnabled={debouncedKeyboard > 0}
+      scrollEnabled={!scrollEnabled ? debouncedKeyboard > 0 : true}
       showsVerticalScrollIndicator={false}
       ref={scrollRef}
       debouncedKeyboard={debouncedKeyboard}
@@ -71,4 +72,5 @@ export default function Form({
 
 Form.defaultProps = {
   handleKeyboardLayout: () => {},
+  scrollEnabled: true,
 };
