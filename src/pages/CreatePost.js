@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState, useRef} from 'react';
+import React, {useCallback, useState, useRef} from 'react';
 import {
   LayoutAnimation,
   StyleSheet,
@@ -79,7 +79,7 @@ export default function CreatePost() {
             placeholder="Post's title"
             keyboardType="number-pad"
             autoCapitalize="none"
-            onFocus={() => scrollToFocusedInput('title')}
+            handleFocus={() => scrollToFocusedInput('title')}
             onSubmitEditing={() => focusNextInput('description')}
           />
 
@@ -91,7 +91,7 @@ export default function CreatePost() {
             placeholder="Post's description"
             autoCapitalize="none"
             returnKeyType="done"
-            onFocus={() => scrollToFocusedInput('description')}
+            handleFocus={() => scrollToFocusedInput('description')}
             onSubmitEditing={() => handleSubmit()}
             value={post}
             onChangeText={value => setPost(value)}
@@ -105,23 +105,19 @@ export default function CreatePost() {
           ...styles.topKeyboard,
           bottom: keyboardHeight,
           display: keyboardHeight > 0 ? 'flex' : 'none',
+          justifyContent:
+            inputSelected === 'title' ? 'flex-end' : 'space-between',
         }}>
         {inputSelected === 'title' ? (
-          <>
-            <TouchableOpacity onPress={() => {}}>
-              <Text>Clean</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => focusNextInput('description')}>
-              <Text>Next</Text>
-            </TouchableOpacity>
-          </>
+          <TouchableOpacity onPress={() => focusNextInput('description')}>
+            <Text style={styles.textAction}>Next</Text>
+          </TouchableOpacity>
         ) : (
           <>
             <Text style={styles.textCount}>{post.length} / 240</Text>
 
             <TouchableOpacity onPress={() => setPost('')}>
-              <Text>Clean</Text>
+              <Text style={styles.textAction}>Clean</Text>
             </TouchableOpacity>
           </>
         )}
@@ -149,7 +145,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#dfdfdf',
     flexDirection: 'row',
     height: 50,
-    justifyContent: 'space-between',
     paddingHorizontal: 20,
     position: 'absolute',
     width: '100%',
@@ -158,5 +153,11 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 14,
     fontWeight: '400',
+  },
+
+  textAction: {
+    color: '#0050f4',
+    fontSize: 18,
+    fontWeight: '600',
   },
 });
