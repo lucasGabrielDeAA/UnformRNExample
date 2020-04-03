@@ -1,4 +1,5 @@
 import React, {useRef, useState, useCallback, useEffect} from 'react';
+import {Platform} from 'react-native';
 
 import {Form as CustomForm} from '@unform/mobile';
 
@@ -44,8 +45,12 @@ export default function Form({
 
   const handleKeyboardCallback = useCallback(
     ({keyboardHeight: height, layoutAnimationConfig}) => {
-      handleKeyboardLayout({height, layoutAnimationConfig});
-      setKeyboardHeight(height);
+      if (Platform.OS === 'ios') {
+        handleKeyboardLayout({height, layoutAnimationConfig});
+        setKeyboardHeight(height);
+      } else {
+        handleKeyboardLayout({height, layoutAnimationConfig});
+      }
     },
     [handleKeyboardLayout],
   );
