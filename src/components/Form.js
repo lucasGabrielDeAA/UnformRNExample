@@ -13,6 +13,7 @@ export default function Form({
   formRef,
   initialData,
   schema,
+  handleKeyboardLayout,
 }) {
   const scrollRef = useRef(null);
 
@@ -39,9 +40,13 @@ export default function Form({
     setOffset(event.nativeEvent.contentOffset.y);
   }, []);
 
-  const handleKeyboardCallback = useCallback(({keyboardHeight: height}) => {
-    setKeyboardHeight(height);
-  }, []);
+  const handleKeyboardCallback = useCallback(
+    ({keyboardHeight: height, layoutAnimationConfig}) => {
+      handleKeyboardLayout({height, layoutAnimationConfig});
+      setKeyboardHeight(height);
+    },
+    [handleKeyboardLayout],
+  );
 
   return (
     <ScrollView
@@ -71,3 +76,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+Form.defaultProps = {
+  handleKeyboardLayout: () => {},
+};
