@@ -10,14 +10,14 @@ export default function Home() {
 
   return (
     <Container>
-      <Title>Bem-vindo</Title>
+      <Title>Welcome</Title>
 
       <Button
         title="Keyboard example"
         onPress={() => navigation.navigate('Submit')}
       />
       <Button
-        title="Keyboard topbox"
+        title="Keyboard toolbox"
         onPress={() => navigation.navigate('CreatePost')}
       />
       <Button
