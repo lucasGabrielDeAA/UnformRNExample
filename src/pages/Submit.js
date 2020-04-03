@@ -1,5 +1,12 @@
 import React, {useRef, useCallback, useState} from 'react';
-import {Text, Image, Alert, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  Image,
+  Alert,
+  StyleSheet,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -156,9 +163,10 @@ export default function Submit() {
           <Text>Save</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('CreatePost')}>
-          <Text>Create post</Text>
-        </TouchableOpacity>
+        <Button
+          title="Create post"
+          onPress={() => navigation.navigate('CreatePost')}
+        />
       </Form>
     </SafeAreaView>
   );
