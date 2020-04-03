@@ -1,23 +1,17 @@
 import React, {useRef, useCallback, useState} from 'react';
-import {
-  Text,
-  Image,
-  Alert,
-  StyleSheet,
-  TouchableOpacity,
-  Button,
-} from 'react-native';
+import {Text, Alert, TouchableOpacity, Button} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {Scope} from '@unform/core';
 
-import Yup from '../config/yup';
+import Yup from '../../config/yup';
 
-import Form from '../components/Form';
-import Input from '../components/Input';
-import MaskedInput from '../components/MaskedInput';
+import Form from '../../components/Form';
+import Input from '../../components/Form/Input';
+import MaskedInput from '../../components/MaskedInput';
+
+import {Container, TopImage} from './styles';
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
@@ -71,7 +65,7 @@ export default function Submit() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <Form
         formRef={formRef}
         handleSubmit={handleSubmit}
@@ -84,13 +78,11 @@ export default function Submit() {
           cpf: '11111111111',
           birthday: '11111995',
         }}>
-        <Image
+        <TopImage
           source={{
             uri:
               'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
           }}
-          resizeMode="contain"
-          style={styles.top}
         />
         <Input
           autoCorrect={false}
@@ -168,19 +160,6 @@ export default function Submit() {
           onPress={() => navigation.navigate('CreatePost')}
         />
       </Form>
-    </SafeAreaView>
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    marginHorizontal: 15,
-  },
-  top: {
-    alignSelf: 'center',
-    height: 200,
-    width: 300,
-  },
-});

@@ -1,19 +1,8 @@
 import React, {useCallback, useState, useRef} from 'react';
-import {
-  LayoutAnimation,
-  StyleSheet,
-  Image,
-  View,
-  Platform,
-  UIManager,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {LayoutAnimation, Platform, UIManager} from 'react-native';
 
-import {SafeAreaView} from 'react-native-safe-area-context';
-
-import Form from '../components/Form';
-import Input from '../components/Input';
+import Form from '../../components/Form';
+import Input from '../../components/Form/Input';
 
 if (
   Platform.OS === 'android' &&
@@ -22,9 +11,17 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
+import {
+  Container,
+  TopImage,
+  ToolBox,
+  Action,
+  Label,
+  ActionText,
+} from './styles';
+
 export default function CreatePost() {
   const formRef = useRef(null);
-  // const keyboard = useKeyboard();
 
   const [inputSelected, setInputSelected] = useState('');
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -54,7 +51,7 @@ export default function CreatePost() {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
+      <Container>
         <Form
           handleKeyboardLayout={handleKeyboardLayout}
           formRef={formRef}
@@ -64,13 +61,11 @@ export default function CreatePost() {
             title: '',
             description: '',
           }}>
-          <Image
+          <TopImage
             source={{
               uri:
                 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png',
             }}
-            resizeMode="contain"
-            style={styles.logo}
           />
 
           <Input
@@ -98,66 +93,25 @@ export default function CreatePost() {
             maxLength={240}
           />
         </Form>
-      </SafeAreaView>
+      </Container>
 
-      <View
-        style={{
-          ...styles.topKeyboard,
-          bottom: keyboardHeight,
-          display: keyboardHeight > 0 ? 'flex' : 'none',
-          justifyContent:
-            inputSelected === 'title' ? 'flex-end' : 'space-between',
-        }}>
+      <ToolBox
+        pullToEnd={inputSelected === 'title'}
+        keyboardHeight={keyboardHeight}>
         {inputSelected === 'title' ? (
-          <TouchableOpacity onPress={() => focusNextInput('description')}>
-            <Text style={styles.textAction}>Next</Text>
-          </TouchableOpacity>
+          <Action onPress={() => focusNextInput('description')}>
+            <ActionText>Next</ActionText>
+          </Action>
         ) : (
           <>
-            <Text style={styles.textCount}>{post.length} / 240</Text>
+            <Label>{post.length} / 240</Label>
 
-            <TouchableOpacity onPress={() => setPost('')}>
-              <Text style={styles.textAction}>Clean</Text>
-            </TouchableOpacity>
+            <Action onPress={() => setPost('')}>
+              <ActionText>Clean</ActionText>
+            </Action>
           </>
         )}
-      </View>
+      </ToolBox>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 15,
-  },
-  logo: {
-    alignSelf: 'center',
-    height: 200,
-    width: 300,
-    marginTop: 50,
-    marginBottom: 50,
-  },
-  topKeyboard: {
-    alignItems: 'center',
-    backgroundColor: '#dfdfdf',
-    flexDirection: 'row',
-    height: 50,
-    paddingHorizontal: 20,
-    position: 'absolute',
-    width: '100%',
-  },
-  textCount: {
-    color: '#000',
-    fontSize: 14,
-    fontWeight: '400',
-  },
-
-  textAction: {
-    color: '#0050f4',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-});
