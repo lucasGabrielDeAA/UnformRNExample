@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useState, useCallback} from 'react';
 import {useField} from '@unform/core';
 
-import {Container, CustomInput, Error} from './styles';
+import {Container, CustomInput, Error, Label} from './styles';
 
 export default function Input({
   name,
@@ -13,11 +13,11 @@ export default function Input({
 }) {
   const inputRef = useRef(null);
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
-  const [active, setActive] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   const handleInputFocus = useCallback(() => {
     handleFocus();
-    setActive(true);
+    setFocused(true);
   }, [handleFocus]);
 
   useEffect(() => {
@@ -41,8 +41,10 @@ export default function Input({
 
   return (
     <Container>
+      <Label show={focused}>{placeholder}</Label>
+
       <CustomInput
-        active={active}
+        focused={focused}
         error={error}
         multiline={multiline}
         underlineColorAndroid="transparent"
@@ -50,7 +52,7 @@ export default function Input({
         placeholder={placeholder}
         defaultValue={defaultValue}
         onFocus={() => handleInputFocus()}
-        onBlur={() => setActive(false)}
+        onBlur={() => setFocused(false)}
         {...rest}
       />
 

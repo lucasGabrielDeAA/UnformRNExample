@@ -4,16 +4,25 @@ import styled, {css} from 'styled-components/native';
 export const Container = styled.View`
   flex-direction: column;
   margin-bottom: 15px;
+  height: 60px;
   width: 100%;
 `;
 
-export const CustomInput = styled.TextInput`
-  border-color: ${props => (props.error ? '#f00' : '#444')}
+export const Label = styled.Text`
+  color: #444;
+  font-size: 13px;
+  display: ${props => (props.show ? 'flex' : 'none')};
+`;
+
+export const CustomInput = styled.TextInput.attrs(() => ({
+  placeholderTextColor: '#a1a1a1;',
+}))`
   border-bottom-width: ${StyleSheet.hairlineWidth}px;
+  border-color: ${props => (props.error ? '#f00' : '#444')};
   border-width: 0;
   color: #444;
   font-size: 15px;
-  padding: 16px 12px;
+  padding: 12px;
 
   ${props =>
     props.multiline &&
@@ -23,12 +32,10 @@ export const CustomInput = styled.TextInput`
     `}
 
   ${props =>
-    props.active &&
+    props.focused &&
     css`
       border-color: #0050f4;
       border-bottom-width: ${StyleSheet.hairlineWidth + 1}px;
-      font-size: 18px;
-      padding: 13px 10px;
     `}
 `;
 
