@@ -1,13 +1,26 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useCallback} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {TextInputMask} from 'react-native-masked-text';
 import {useField} from '@unform/core';
 
-export default function MaskedInput({name, label, placeholder, mask, ...rest}) {
+export default function MaskedInput({
+  name,
+  label,
+  placeholder,
+  mask,
+  handleFocus,
+  ...rest
+}) {
   const inputRef = useRef(null);
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
 
   const [currentValue, setCurrentValue] = useState('');
+  const [active, setActive] = useState(false);
+
+  const handleInputFocus = useCallback(() => {
+    handleFocus();
+    setActive(true);
+  }, [handleFocus]);
 
   useEffect(() => {
     registerField({
@@ -35,12 +48,16 @@ export default function MaskedInput({name, label, placeholder, mask, ...rest}) {
       <TextInputMask
         underlineColorAndroid="transparent"
         type={mask}
-        style={error ? styles.inputError : styles.input}
+        style={
+          active ? styles.active : error ? styles.inputError : styles.input
+        }
         ref={inputRef}
         placeholder={placeholder}
         value={currentValue}
         defaultValue={defaultValue}
         onChangeText={v => setCurrentValue(v)}
+        onFocus={() => handleInputFocus()}
+        onBlur={() => setActive(false)}
         {...rest}
       />
 
@@ -57,8 +74,8 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    borderRadius: 5,
-    borderWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderWidth: 0,
     color: '#444',
     fontSize: 15,
     paddingHorizontal: 12,
@@ -66,9 +83,9 @@ const styles = StyleSheet.create({
   },
 
   inputError: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: '#f00',
-    borderRadius: 5,
-    borderWidth: 1,
+    borderWidth: 0,
     color: '#444',
     fontSize: 15,
     paddingHorizontal: 12,
@@ -79,5 +96,15 @@ const styles = StyleSheet.create({
     color: '#f00',
     fontSize: 15,
     marginTop: 5,
+  },
+
+  active: {
+    borderBottomWidth: 1 + StyleSheet.hairlineWidth,
+    borderColor: '#0050ff',
+    borderWidth: 0,
+    color: '#444',
+    fontSize: 18,
+    paddingHorizontal: 10,
+    paddingVertical: 13,
   },
 });
