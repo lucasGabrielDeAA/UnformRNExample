@@ -1,3 +1,4 @@
+import {Platform} from 'react-native';
 import styled, {css} from 'styled-components/native';
 
 export const Container = styled.View`
@@ -18,12 +19,13 @@ export const TopImage = styled.Image.attrs(() => ({
 
 export const ToolBox = styled.View`
   align-items: center;
-  bottom: ${props => props.keyboardHeight}px;
+  bottom: ${props => (Platform.OS === 'ios' ? props.keyboardHeight : 0)}px;
   background-color: #dfdfdf;
   display: none;
   flex-direction: row;
   height: 50px;
   justify-content: ${props => (props.pullToEnd ? 'flex-end' : 'space-between')};
+  opacity: 0;
   padding: 0 20px;
   position: absolute;
   width: 100%;
@@ -32,6 +34,7 @@ export const ToolBox = styled.View`
     props.keyboardHeight > 0 &&
     css`
       display: flex;
+      opacity: 1;
     `}
 `;
 

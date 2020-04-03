@@ -4,11 +4,10 @@ import {LayoutAnimation, Platform, UIManager} from 'react-native';
 import Form from '../../components/Form';
 import Input from '../../components/Form/Input';
 
-if (
-  Platform.OS === 'android' &&
-  UIManager.setLayoutAnimationEnabledExperimental
-) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
 }
 
 import {
