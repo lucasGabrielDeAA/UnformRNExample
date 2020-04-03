@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components/native';
 export const Container = styled.View`
   flex-direction: column;
   margin-bottom: 15px;
-  height: 60px;
+  height: ${props => (props.multiline ? '250px' : '60px')};
   width: 100%;
 `;
 

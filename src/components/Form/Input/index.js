@@ -40,7 +40,7 @@ export default function Input({
   }, [fieldName, registerField]);
 
   return (
-    <Container>
+    <Container multiline={multiline}>
       <Label show={focused}>{placeholder}</Label>
 
       <CustomInput
