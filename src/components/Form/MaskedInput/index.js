@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useState, useCallback} from 'react';
 import {useField} from '@unform/core';
 
-import {Container, StyledInput, Error} from './styles';
+import {Container, StyledInput, Error, Label} from './styles';
 
 export default function MaskedInput({
   name,
@@ -15,11 +15,11 @@ export default function MaskedInput({
   const {fieldName, registerField, defaultValue = '', error} = useField(name);
 
   const [currentValue, setCurrentValue] = useState('');
-  const [active, setActive] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   const handleInputFocus = useCallback(() => {
     handleFocus();
-    setActive(true);
+    setFocused(true);
   }, [handleFocus]);
 
   useEffect(() => {
@@ -45,10 +45,12 @@ export default function MaskedInput({
 
   return (
     <Container>
+      <Label show={focused}>{placeholder}</Label>
+
       <StyledInput
         underlineColorAndroid="transparent"
         type={mask}
-        active={active}
+        focused={focused}
         error={error}
         ref={inputRef}
         placeholder={placeholder}
@@ -56,7 +58,7 @@ export default function MaskedInput({
         defaultValue={defaultValue}
         onChangeText={v => setCurrentValue(v)}
         onFocus={() => handleInputFocus()}
-        onBlur={() => setActive(false)}
+        onBlur={() => setFocused(false)}
         {...rest}
       />
 
