@@ -1,7 +1,5 @@
 import React, {useRef, useCallback, useState} from 'react';
-import {Text, Alert, TouchableOpacity, Button} from 'react-native';
-
-import {useNavigation} from '@react-navigation/native';
+import {Alert, Button} from 'react-native';
 
 import {Scope} from '@unform/core';
 
@@ -29,7 +27,6 @@ const schema = Yup.object().shape({
 });
 
 export default function Submit() {
-  const navigation = useNavigation();
   const formRef = useRef(null);
 
   const [inputSelected, setInputSelected] = useState('');
@@ -151,14 +148,7 @@ export default function Submit() {
           />
         </Scope>
 
-        <TouchableOpacity onPress={() => formRef.current.submitForm()}>
-          <Text>Save</Text>
-        </TouchableOpacity>
-
-        <Button
-          title="Create post"
-          onPress={() => navigation.navigate('CreatePost')}
-        />
+        <Button title="Save" onPress={() => formRef.current.submitForm()} />
       </Form>
     </Container>
   );
