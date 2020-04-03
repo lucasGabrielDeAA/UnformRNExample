@@ -13,7 +13,9 @@ import {Container, TopImage} from './styles';
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
-  age: Yup.number(),
+  age: Yup.number()
+    .min(18)
+    .required(),
   email: Yup.string()
     .email()
     .required(),
@@ -66,15 +68,7 @@ export default function Submit() {
       <Form
         formRef={formRef}
         handleSubmit={handleSubmit}
-        inputSelected={inputSelected}
-        initialData={{
-          name: 'vinicius',
-          email: 'vini@catafesta@gmail.com',
-          age: '23',
-          password: '123456',
-          cpf: '11111111111',
-          birthday: '11111995',
-        }}>
+        inputSelected={inputSelected}>
         <TopImage
           source={{
             uri:
@@ -107,7 +101,7 @@ export default function Submit() {
           name="age"
           placeholder="Age"
           autoCapitalize="none"
-          keyboardType="numeric"
+          keyboardType="number-pad"
           returnKeyType="done"
           handleFocus={() => scrollToFocusedInput('age')}
           onSubmitEditing={() => focusNextInput('password')}
@@ -128,7 +122,7 @@ export default function Submit() {
             mask="cpf"
             name="cpf"
             placeholder="User's CPF"
-            keyboardType="numeric"
+            keyboardType="number-pad"
             returnKeyType="done"
             handleFocus={() => scrollToFocusedInput('documents.cpf')}
             onSubmitEditing={() => focusNextInput('documents.birthday')}
