@@ -1,10 +1,10 @@
+import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
   align-items: center;
   flex: 1;
   justify-content: center;
-  padding: 15px 0;
 `;
 
 export const Label = styled.Text`
@@ -18,4 +18,27 @@ export const Information = styled.Text`
   color: #444;
   font-size: 12px;
   margin: 10px 15px;
+`;
+
+export const UserInfo = styled.View`
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 20px 20px 0;
+  width: 100%;
+`;
+
+export const Avatar = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  border-radius: 30px;
+  border: ${StyleSheet.hairlineWidth}px solid #ff4400;
+  height: 60px;
+  width: 60px;
+`;
+
+export const NameContainer = styled.View`
+  padding-left: 20px;
+  flex: 1;
 `;

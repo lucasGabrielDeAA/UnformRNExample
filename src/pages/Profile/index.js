@@ -1,6 +1,14 @@
 import React, {useRef, useState, useCallback} from 'react';
+import Modal from 'react-native-modal';
 
-import {Container, Label, Information} from './styles';
+import {
+  Container,
+  UserInfo,
+  Avatar,
+  NameContainer,
+  Label,
+  Information,
+} from './styles';
 
 import Form from '../../components/Form';
 import CustomInput from '../../components/Form/CustomInput';
@@ -30,6 +38,35 @@ export default function Profile() {
         formRef={formRef}
         handleSubmit={handleSubmit}
         inputSelected={inputSelected}>
+        <UserInfo>
+          <Avatar
+            source={{
+              uri:
+                'https://yt3.ggpht.com/a/AATXAJxZIrmTsSyOyg5rXM9PRTmso0d94t44hH9Qbg=s900-c-k-c0xffffffff-no-rj-mo',
+            }}
+          />
+          <NameContainer>
+            <CustomInput
+              autoCorrect={false}
+              name="name"
+              placeholder="Nome"
+              autoCapitalize="none"
+              returnKeyType="next"
+              handleFocus={() => scrollToFocusedInput('name')}
+              onSubmitEditing={() => focusNextInput('lastname')}
+            />
+            <CustomInput
+              autoCorrect={false}
+              name="lastname"
+              placeholder="Sobrenome"
+              autoCapitalize="none"
+              returnKeyType="next"
+              handleFocus={() => scrollToFocusedInput('lastname')}
+              onSubmitEditing={() => focusNextInput('bio')}
+            />
+          </NameContainer>
+        </UserInfo>
+
         <CustomInput
           autoCorrect={false}
           name="bio"
@@ -47,7 +84,7 @@ export default function Profile() {
           autoCapitalize="none"
           returnKeyType="next"
           handleFocus={() => scrollToFocusedInput('city')}
-          onSubmitEditing={() => focusNextInput('email')}
+          onSubmitEditing={() => focusNextInput('state')}
         />
 
         <CustomInput
@@ -76,7 +113,7 @@ export default function Profile() {
           autoCorrect={false}
           name="birthday"
           placeholder="Data de nascimento"
-          returnKeyType="next"
+          returnKeyType="done"
           keyboardType="number-pad"
           handleFocus={() => scrollToFocusedInput('birthday')}
           onSubmitEditing={() => focusNextInput('gender')}
@@ -112,7 +149,7 @@ export default function Profile() {
           autoCorrect={false}
           name="cardio"
           placeholder="Frequência cardíaca máxima"
-          returnKeyType="next"
+          returnKeyType="done"
           keyboardType="number-pad"
           handleFocus={() => scrollToFocusedInput('cardio')}
           onSubmitEditing={() => focusNextInput('distance')}
@@ -122,7 +159,7 @@ export default function Profile() {
           autoCorrect={false}
           name="distance"
           placeholder="Distância"
-          returnKeyType="next"
+          returnKeyType="done"
           keyboardType="number-pad"
           handleFocus={() => scrollToFocusedInput('distance')}
           onSubmitEditing={() => focusNextInput('time')}
@@ -132,7 +169,7 @@ export default function Profile() {
           autoCorrect={false}
           name="time"
           placeholder="Tempo de prova"
-          returnKeyType="next"
+          returnKeyType="done"
           keyboardType="number-pad"
           handleFocus={() => scrollToFocusedInput('time')}
           onSubmitEditing={() => focusNextInput('ftp')}
