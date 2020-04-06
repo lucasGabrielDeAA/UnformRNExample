@@ -16,7 +16,7 @@ export const Label = styled.Text`
 `;
 
 export const StyledInput = styled(TextInputMask).attrs(() => ({
-  placeholderTextColor: '#a1a1a1;',
+  placeholderTextColor: '#a1a1a1',
 }))`
   border-bottom-width: ${StyleSheet.hairlineWidth}px;
   border-color: ${props => (props.error ? '#f00' : '#444')}
