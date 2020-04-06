@@ -1,5 +1,6 @@
 import React, {useRef, useState, useCallback, useEffect} from 'react';
 import {Platform} from 'react-native';
+import {useHeaderHeight} from '@react-navigation/stack';
 
 import {Form as CustomForm} from '@unform/mobile';
 
@@ -19,6 +20,7 @@ export default function Form({
   scrollEnabled,
 }) {
   const scrollRef = useRef(null);
+  const headerHeight = useHeaderHeight();
 
   const [offset, setOffset] = useState(0);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -32,7 +34,7 @@ export default function Form({
         .measure((fx, fy, width, height, px, py) => {
           scrollRef.current.scrollTo({
             x: 0,
-            y: offset + py,
+            y: offset + py - headerHeight - 25,
             animated: true,
           });
         });
