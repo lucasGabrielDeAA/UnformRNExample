@@ -1,5 +1,4 @@
 import React, {useRef, useState, useCallback} from 'react';
-import Modal from 'react-native-modal';
 
 import {
   Container,
@@ -12,6 +11,7 @@ import {
 
 import Form from '../../components/Form';
 import CustomInput from '../../components/Form/CustomInput';
+import Select from '../../components/Form/Select';
 
 export default function Profile() {
   const formRef = useRef(null);
@@ -118,7 +118,7 @@ export default function Profile() {
           handleFocus={() => scrollToFocusedInput('birthday')}
           onSubmitEditing={() => focusNextInput('gender')}
         />
-
+        {/*
         <CustomInput
           autoCorrect={false}
           name="gender"
@@ -127,7 +127,9 @@ export default function Profile() {
           returnKeyType="next"
           handleFocus={() => scrollToFocusedInput('gender')}
           onSubmitEditing={() => focusNextInput('weight')}
-        />
+        /> */}
+
+        <Select placeholder="Sexo" />
 
         <CustomInput
           autoCorrect={false}
