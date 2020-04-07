@@ -1,5 +1,5 @@
 import React, {useCallback, useState, useRef} from 'react';
-import {LayoutAnimation, Platform, UIManager} from 'react-native';
+import {LayoutAnimation, Platform, UIManager, Keyboard} from 'react-native';
 
 import Form from '../../components/Form';
 import Input from '../../components/Form/Input';
@@ -28,7 +28,9 @@ export default function CreatePost() {
 
   const handleSubmit = useCallback(async (data, {reset}) => {
     try {
+      Keyboard.dismiss();
       reset();
+      setPost('');
     } catch (err) {}
   }, []);
 
@@ -85,9 +87,7 @@ export default function CreatePost() {
             name="description"
             placeholder="Post's description"
             autoCapitalize="none"
-            returnKeyType="done"
             handleFocus={() => scrollToFocusedInput('description')}
-            onSubmitEditing={() => handleSubmit()}
             value={post}
             onChangeText={value => setPost(value)}
             maxLength={240}
@@ -106,8 +106,8 @@ export default function CreatePost() {
           <>
             <Label>{post.length} / 240</Label>
 
-            <Action onPress={() => setPost('')}>
-              <ActionText>Clean</ActionText>
+            <Action onPress={() => formRef.current.submitForm()}>
+              <ActionText>Submit</ActionText>
             </Action>
           </>
         )}
