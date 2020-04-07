@@ -24,8 +24,8 @@ Then you run
   yarn ios - For IOS's environment
 ```
 
-![Android screenshot](/images/android.png =740X360)
-![IOS screenshot](/images/ios.png =392X747)
+![Android screenshot](/images/android.png =740x360)
+![IOS screenshot](/images/ios.png =392x747)
 
 ## KeyboardScroll Page
 
