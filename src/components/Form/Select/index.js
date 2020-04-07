@@ -48,8 +48,12 @@ export default function Select({placeholder, options}) {
           <StyledPicker
             selectedValue={selected?.value || ''}
             onValueChange={handleSelect}>
-            {options.map(option => (
-              <StyledPicker.Item label={option.label} value={option.value} />
+            {options.map((option, index) => (
+              <StyledPicker.Item
+                key={String(index)}
+                label={option.label}
+                value={option.value}
+              />
             ))}
           </StyledPicker>
         )}
@@ -63,8 +67,12 @@ export default function Select({placeholder, options}) {
           <StyledPicker
             selectedValue={selected?.value || ''}
             onValueChange={handleSelect}>
-            {options.map(option => (
-              <StyledPicker.Item label={option.label} value={option.value} />
+            {options.map((option, index) => (
+              <StyledPicker.Item
+                key={String(index)}
+                label={option.label}
+                value={option.value}
+              />
             ))}
           </StyledPicker>
 
