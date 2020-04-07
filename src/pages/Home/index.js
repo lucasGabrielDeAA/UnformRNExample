@@ -1,9 +1,8 @@
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 
-import {Container, Title} from './styles';
+import {Container, Title, Buttons, Row, Button, ButtonText} from './styles';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -12,21 +11,27 @@ export default function Home() {
     <Container>
       <Title>Welcome</Title>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Submit')}>
-        <Text>Keyboard example</Text>
-      </TouchableOpacity>
+      <Buttons>
+        <Row>
+          <Button onPress={() => navigation.navigate('Submit')}>
+            <ButtonText>Keyboard Example</ButtonText>
+          </Button>
 
-      <TouchableOpacity onPress={() => navigation.navigate('CreatePost')}>
-        <Text>Keyboard toolbox</Text>
-      </TouchableOpacity>
+          <Button onPress={() => navigation.navigate('CreatePost')}>
+            <ButtonText>Keyboard Toolbox</ButtonText>
+          </Button>
+        </Row>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-        <Text>Strava Form example</Text>
-      </TouchableOpacity>
+        <Row>
+          <Button onPress={() => navigation.navigate('Profile')}>
+            <ButtonText>Strava Form</ButtonText>
+          </Button>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
-        <Text>WhatsApp keyboard example</Text>
-      </TouchableOpacity>
+          <Button onPress={() => navigation.navigate('Chat')}>
+            <ButtonText>WhatsApp ToolBox</ButtonText>
+          </Button>
+        </Row>
+      </Buttons>
     </Container>
   );
 }
