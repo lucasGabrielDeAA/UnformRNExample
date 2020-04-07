@@ -3,7 +3,7 @@ import {View} from 'react-native';
 
 import {LayoutAnimation, Keyboard, Platform} from 'react-native';
 
-export default function KeyboardEventListener({callback, children}) {
+export default function KeyboardController({callback, children}) {
   useEffect(() => {
     if (Platform.OS === 'ios') {
       Keyboard.addListener('keyboardWillChangeFrame', onChangeKeyboard);
