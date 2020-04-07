@@ -10,7 +10,7 @@ export const Container = styled.View`
 `;
 
 export const Label = styled.Text`
-  color: #444;
+  color: #0050f4;
   font-size: 13px;
   display: ${props => (props.show ? 'flex' : 'none')};
 `;
