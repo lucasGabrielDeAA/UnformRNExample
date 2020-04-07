@@ -21,7 +21,11 @@ export default function Home() {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-        <Text>Form example</Text>
+        <Text>Strava Form example</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+        <Text>WhatsApp keyboard example</Text>
       </TouchableOpacity>
     </Container>
   );
