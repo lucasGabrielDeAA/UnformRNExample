@@ -1,9 +1,8 @@
 import {Platform, FlatList} from 'react-native';
 import styled, {css} from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   flex: 1;
-  margin: 0 15px;
 `;
 
 export const ToolBox = styled.View`
@@ -24,16 +23,17 @@ export const StyledInput = styled.TextInput`
   background: #fff;
   border-radius: 20px;
   color: #444;
-  font-size: 15px;
-  padding: 10px;
+  font-size: 14px;
+  padding: 5px 10px;
   text-align-vertical: top;
   width: 80%;
 `;
 
 export const Messages = styled(FlatList).attrs(() => ({
-  contentContainerStyles: {
+  contentContainerStyle: {
     background: '#aaa',
     width: '100%',
+    paddingHorizontal: 15,
     paddingTop: 10,
   },
 }))``;
@@ -71,8 +71,8 @@ export const SendButton = styled.TouchableOpacity`
   background: #0050f4;
   border-radius: 20px;
   display: flex;
-  height: 40px;
   justify-content: center;
+  padding: 10px 0;
   width: 70px;
 `;
 

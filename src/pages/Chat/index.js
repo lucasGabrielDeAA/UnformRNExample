@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {LayoutAnimation, Platform, UIManager, FlatList} from 'react-native';
+import {LayoutAnimation, Platform, UIManager} from 'react-native';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -36,18 +36,16 @@ export default function Chat() {
   }, [message, messages]);
 
   return (
-    <>
-      <Container>
-        <Messages
-          keyExtractor={item => String(item.id)}
-          data={messages}
-          renderItem={({item}) => (
-            <MessageContainer side={item.id}>
-              <Message>{item.text}</Message>
-            </MessageContainer>
-          )}
-        />
-      </Container>
+    <Container>
+      <Messages
+        keyExtractor={item => String(item.id)}
+        data={messages}
+        renderItem={({item}) => (
+          <MessageContainer side={item.id}>
+            <Message>{item.text}</Message>
+          </MessageContainer>
+        )}
+      />
 
       <ToolBox keyboardHeight={keyboardHeight}>
         <StyledInput
@@ -64,6 +62,6 @@ export default function Chat() {
           <SendButtonText>⌲</SendButtonText>
         </SendButton>
       </ToolBox>
-    </>
+    </Container>
   );
 }
