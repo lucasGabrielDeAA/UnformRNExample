@@ -13,6 +13,11 @@ import Form from '../../components/Form';
 import CustomInput from '../../components/Form/CustomInput';
 import Select from '../../components/Form/Select';
 
+const genders = [
+  {label: 'Masculino', value: 'male'},
+  {label: 'Feminino', value: 'female'},
+];
+
 export default function Profile() {
   const formRef = useRef(null);
 
@@ -116,20 +121,9 @@ export default function Profile() {
           returnKeyType="done"
           keyboardType="number-pad"
           handleFocus={() => scrollToFocusedInput('birthday')}
-          onSubmitEditing={() => focusNextInput('gender')}
         />
-        {/*
-        <CustomInput
-          autoCorrect={false}
-          name="gender"
-          placeholder="Sexo"
-          autoCapitalize="none"
-          returnKeyType="next"
-          handleFocus={() => scrollToFocusedInput('gender')}
-          onSubmitEditing={() => focusNextInput('weight')}
-        /> */}
 
-        <Select placeholder="Sexo" />
+        <Select placeholder="Sexo" options={genders} />
 
         <CustomInput
           autoCorrect={false}
