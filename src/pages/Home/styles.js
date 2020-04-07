@@ -7,15 +7,14 @@ export const Container = styled.SafeAreaView`
 
 export const Buttons = styled.View`
   flex: 1;
-  padding-top: 30px;
+  justify-content: center;
   width: 100%;
 `;
 
 export const Row = styled.View`
-  flex: 1;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 15px;
+  padding: 15px;
 `;
 
 export const Title = styled.Text`
@@ -32,11 +31,16 @@ export const Button = styled.TouchableOpacity`
   elevation: 2;
   display: flex;
   height: 180px;
-  padding: 15px 5px;
+  justify-content: center;
+  padding: 25px 5px 0;
   width: 180px;
 `;
 
 export const ButtonText = styled.Text`
   color: #fff;
   font-size: 18px;
+`;
+
+export const ButtonIcon = styled.Text`
+  font-size: 45px;
 `;
