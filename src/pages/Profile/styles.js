@@ -29,11 +29,10 @@ export const UserInfo = styled.View`
   width: 100%;
 `;
 
-export const Avatar = styled.Image.attrs({
-  resizeMode: 'contain',
-})`
+export const Avatar = styled.Image`
   border-radius: 30px;
-  border: ${StyleSheet.hairlineWidth}px solid #ff4400;
+  border-color: #ff4400;
+  border-width: ${StyleSheet.hairlineWidth}px;
   height: 60px;
   width: 60px;
 `;
