@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from 'react-native';
+import {TouchableOpacity, Text} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 
@@ -12,18 +12,17 @@ export default function Home() {
     <Container>
       <Title>Welcome</Title>
 
-      <Button
-        title="Keyboard example"
-        onPress={() => navigation.navigate('Submit')}
-      />
-      <Button
-        title="Keyboard toolbox"
-        onPress={() => navigation.navigate('CreatePost')}
-      />
-      <Button
-        title="Form example"
-        onPress={() => navigation.navigate('Profile')}
-      />
+      <TouchableOpacity onPress={() => navigation.navigate('Submit')}>
+        <Text>Keyboard example</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('CreatePost')}>
+        <Text>Keyboard toolbox</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+        <Text>Form example</Text>
+      </TouchableOpacity>
     </Container>
   );
 }
