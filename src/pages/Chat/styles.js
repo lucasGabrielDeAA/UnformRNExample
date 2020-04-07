@@ -1,21 +1,50 @@
-import {Platform, FlatList} from 'react-native';
+import {Platform, FlatList, Dimensions} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import styled, {css} from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
+const getIphoneHeight = initialHeight => {
+  const {height} = Dimensions.get('window');
+
+  return isIPhoneXSize(height) || isIPhoneXrSize(height)
+    ? initialHeight + 30
+    : 0;
+};
+
+const isIPhoneXSize = height => {
+  return height === 812;
+};
+
+const isIPhoneXrSize = height => {
+  return height === 896;
+};
+
+export const Container = styled.View`
   flex: 1;
 `;
 
 export const ToolBox = styled.View`
-  align-items: flex-end;
+  align-items: flex-start;
   bottom: ${props => (Platform.OS === 'ios' ? props.keyboardHeight : 0)}px;
-  background-color: #dfdfdf;
+  background: #dfdfdf;
   display: flex;
+  max-height: 150px;
+  min-height: ${props =>
+    Platform.OS === 'ios'
+      ? props.keyboardHeight === 0
+        ? getIphoneHeight(50)
+        : 0
+      : 50}px;
+  position: absolute;
+  width: 100%;
+`;
+
+export const ToolBoxContent = styled.View`
+  align-items: flex-end;
   flex-direction: row;
+  justify-content: space-between;
   max-height: 150px;
   min-height: 50px;
-  justify-content: space-between;
-  padding: 5px 10px 5px 5px;
-  position: absolute;
+  padding: 5px;
   width: 100%;
 `;
 
@@ -24,6 +53,7 @@ export const StyledInput = styled.TextInput`
   border-radius: 20px;
   color: #444;
   font-size: 14px;
+  min-height: 40px;
   padding: 5px 10px;
   text-align-vertical: top;
   width: 80%;
@@ -71,6 +101,7 @@ export const SendButton = styled.TouchableOpacity`
   background: #0050f4;
   border-radius: 20px;
   display: flex;
+  height: 40px;
   justify-content: center;
   padding: 10px 0;
   width: 70px;

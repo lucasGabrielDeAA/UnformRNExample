@@ -1,6 +1,8 @@
 import React, {useCallback, useState} from 'react';
 import {LayoutAnimation, Platform, UIManager} from 'react-native';
 
+import KeyboardController from '../../common/KeyboardController';
+
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
     UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -10,6 +12,7 @@ if (Platform.OS === 'android') {
 import {
   Container,
   ToolBox,
+  ToolBoxContent,
   StyledInput,
   Messages,
   MessageContainer,
@@ -35,8 +38,17 @@ export default function Chat() {
     } catch (err) {}
   }, [message, messages]);
 
+  const handleKeyboardCallback = useCallback(
+    ({keyboardHeight: height, layoutAnimationConfig}) => {
+      LayoutAnimation.configureNext(layoutAnimationConfig);
+      setKeyboardHeight(height);
+    },
+    [],
+  );
+
   return (
     <Container>
+      <KeyboardController callback={handleKeyboardCallback} />
       <Messages
         keyExtractor={item => String(item.id)}
         data={messages}
@@ -48,19 +60,21 @@ export default function Chat() {
       />
 
       <ToolBox keyboardHeight={keyboardHeight}>
-        <StyledInput
-          multiline
-          autoCapitalize="sentences"
-          autoCorrect={false}
-          name="message"
-          placeholder="Type a message"
-          returnKeyType="done"
-          value={message}
-          onChangeText={value => setMessage(value)}
-        />
-        <SendButton onPress={handleSubmit}>
-          <SendButtonText>⌲</SendButtonText>
-        </SendButton>
+        <ToolBoxContent>
+          <StyledInput
+            multiline
+            autoCapitalize="sentences"
+            autoCorrect={false}
+            name="message"
+            placeholder="Type a message"
+            returnKeyType="done"
+            value={message}
+            onChangeText={value => setMessage(value)}
+          />
+          <SendButton onPress={handleSubmit}>
+            <SendButtonText>⌲</SendButtonText>
+          </SendButton>
+        </ToolBoxContent>
       </ToolBox>
     </Container>
   );
