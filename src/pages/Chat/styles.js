@@ -1,5 +1,4 @@
 import {Platform, FlatList, Dimensions} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import styled, {css} from 'styled-components/native';
 
 const getIphoneHeight = initialHeight => {
@@ -54,7 +53,7 @@ export const StyledInput = styled.TextInput`
   color: #444;
   font-size: 14px;
   min-height: 40px;
-  padding: 5px 10px;
+  padding: 10px;
   text-align-vertical: top;
   width: 80%;
 `;
@@ -109,6 +108,6 @@ export const SendButton = styled.TouchableOpacity`
 
 export const SendButtonText = styled.Text`
   color: #fff;
-  font-size: 15px;
+  font-size: 30px;
   font-weight: bold;
 `;
