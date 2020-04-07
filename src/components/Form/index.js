@@ -4,7 +4,7 @@ import {useHeaderHeight} from '@react-navigation/stack';
 
 import {Form as CustomForm} from '@unform/mobile';
 
-import KeyboardEventListener from '../../common/KeyboardEventListener';
+import KeyboardController from '../../common/KeyboardController';
 import useDebounce from '../../common/useDebounce';
 
 import {Container} from './styles';
@@ -64,7 +64,7 @@ export default function Form({
       ref={scrollRef}
       debouncedKeyboard={debouncedKeyboard}
       onScroll={handleScroll}>
-      <KeyboardEventListener callback={handleKeyboardCallback}>
+      <KeyboardController callback={handleKeyboardCallback}>
         <CustomForm
           initialData={initialData}
           schema={schema}
@@ -72,7 +72,7 @@ export default function Form({
           onSubmit={handleSubmit}>
           {children}
         </CustomForm>
-      </KeyboardEventListener>
+      </KeyboardController>
     </Container>
   );
 }
