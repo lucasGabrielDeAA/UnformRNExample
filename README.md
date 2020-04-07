@@ -2,6 +2,31 @@
 
 This project contain a react-native's implementation of [Unform](https://unform.dev/)
 
+## Running the application
+
+First of all, you have to install all the dependencies.
+
+```
+  yarn install
+  or npm install
+```
+
+For IOS's environment, you need to install the `cocoa pods`, using the following command.
+
+```
+ cd ios/ && pod install && cd ..
+```
+
+Then you run
+
+```
+  yarn android - For Android's environment
+  yarn ios - For IOS's environment
+```
+
+![Android screenshot](/images/android.png)
+![IOS screenshot](/images/ios.png)
+
 ## KeyboardScroll Page
 
 Página criada para testar o controle do teclado com vários inputs utilizando o `KeyboardController` e criando um componente de form personalizado.
