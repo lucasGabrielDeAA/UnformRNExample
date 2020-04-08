@@ -161,7 +161,6 @@
 				113A52AE9781BB08D7721729 /* Pods-UnformExampleTests.debug.xcconfig */,
 				BA22458879A816C091C70F78 /* Pods-UnformExampleTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -308,6 +307,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
