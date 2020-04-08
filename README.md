@@ -42,3 +42,8 @@ Página inspirada no app Strava que visa criar um formulário mais **"amigável"
 ## Whatsapp ToolBox Example
 
 Página de chat que possui um input na toolbox do teclado. Essa toolbox tem posicionamento absoluto e acompanha a animação do teclado. Conforme o tamanho do texto, a toolbox aumenta sua altura até o limite de **150px** (igual aos apps de chat). 
+
+## Contributors
+
+- [Lucas Gabriel](https://github.com/lucasGabrielDeAA)
+- [Vinicius](https://github.com/vinicfrancisco)
