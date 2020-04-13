@@ -1,40 +1,8 @@
-import {Platform, FlatList, Dimensions} from 'react-native';
+import {FlatList} from 'react-native';
 import styled, {css} from 'styled-components/native';
-
-const getIphoneHeight = initialHeight => {
-  const {height} = Dimensions.get('window');
-
-  return isIPhoneXSize(height) || isIPhoneXrSize(height)
-    ? initialHeight + 30
-    : 0;
-};
-
-const isIPhoneXSize = height => {
-  return height === 812;
-};
-
-const isIPhoneXrSize = height => {
-  return height === 896;
-};
 
 export const Container = styled.View`
   flex: 1;
-`;
-
-export const ToolBox = styled.View`
-  align-items: flex-start;
-  bottom: ${props => (Platform.OS === 'ios' ? props.keyboardHeight : 0)}px;
-  background: #dfdfdf;
-  display: flex;
-  max-height: 150px;
-  min-height: ${props =>
-    Platform.OS === 'ios'
-      ? props.keyboardHeight === 0
-        ? getIphoneHeight(50)
-        : 0
-      : 50}px;
-  position: absolute;
-  width: 100%;
 `;
 
 export const ToolBoxContent = styled.View`

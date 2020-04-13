@@ -3,6 +3,8 @@ import {LayoutAnimation, Platform, UIManager} from 'react-native';
 
 import KeyboardController from '../../common/KeyboardController';
 
+import ToolBox from '../../components/ToolBox';
+
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
     UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -11,7 +13,6 @@ if (Platform.OS === 'android') {
 
 import {
   Container,
-  ToolBox,
   ToolBoxContent,
   StyledInput,
   Messages,
@@ -59,7 +60,7 @@ export default function Chat() {
         )}
       />
 
-      <ToolBox keyboardHeight={keyboardHeight}>
+      <ToolBox bottom keyboardHeight={keyboardHeight}>
         <ToolBoxContent>
           <StyledInput
             multiline
