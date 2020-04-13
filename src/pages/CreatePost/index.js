@@ -3,6 +3,7 @@ import {LayoutAnimation, Platform, UIManager, Keyboard} from 'react-native';
 
 import Form from '../../components/Form';
 import Input from '../../components/Form/Input';
+import ToolBox from '../../components/ToolBox';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -13,8 +14,8 @@ if (Platform.OS === 'android') {
 import {
   Container,
   TopImage,
-  ToolBox,
   Action,
+  ToolBoxContainer,
   Label,
   ActionText,
 } from './styles';
@@ -95,22 +96,22 @@ export default function CreatePost() {
         </Form>
       </Container>
 
-      <ToolBox
-        pullToEnd={inputSelected === 'title'}
-        keyboardHeight={keyboardHeight}>
-        {inputSelected === 'title' ? (
-          <Action onPress={() => focusNextInput('description')}>
-            <ActionText>Next</ActionText>
-          </Action>
-        ) : (
-          <>
-            <Label>{post.length} / 240</Label>
-
-            <Action onPress={() => formRef.current.submitForm()}>
-              <ActionText>Submit</ActionText>
+      <ToolBox keyboardHeight={keyboardHeight}>
+        <ToolBoxContainer onlyOneChild={inputSelected === 'title'}>
+          {inputSelected === 'title' ? (
+            <Action onPress={() => focusNextInput('description')}>
+              <ActionText>Next</ActionText>
             </Action>
-          </>
-        )}
+          ) : (
+            <>
+              <Label>{post.length} / 240</Label>
+
+              <Action onPress={() => formRef.current.submitForm()}>
+                <ActionText>Submit</ActionText>
+              </Action>
+            </>
+          )}
+        </ToolBoxContainer>
       </ToolBox>
     </>
   );

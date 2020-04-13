@@ -17,25 +17,12 @@ export const TopImage = styled.Image.attrs(() => ({
   width: 300px;
 `;
 
-export const ToolBox = styled.View`
+export const ToolBoxContainer = styled.View`
   align-items: center;
-  bottom: ${props => (Platform.OS === 'ios' ? props.keyboardHeight : 0)}px;
-  background-color: #dfdfdf;
-  display: none;
   flex-direction: row;
-  height: 50px;
-  justify-content: ${props => (props.pullToEnd ? 'flex-end' : 'space-between')};
-  opacity: 0;
-  padding: 0 20px;
-  position: absolute;
+  justify-content: ${props =>
+    props.onlyOneChild ? 'flex-end' : 'space-between'};
   width: 100%;
-
-  ${props =>
-    props.keyboardHeight > 0 &&
-    css`
-      display: flex;
-      opacity: 1;
-    `}
 `;
 
 export const Action = styled.TouchableOpacity``;
