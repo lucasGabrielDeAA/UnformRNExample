@@ -15,7 +15,7 @@ import {
   Container,
   TopImage,
   Action,
-  ToolBoxContainer,
+  ToolBoxContent,
   Label,
   ActionText,
 } from './styles';
@@ -97,7 +97,7 @@ export default function CreatePost() {
       </Container>
 
       <ToolBox keyboardHeight={keyboardHeight}>
-        <ToolBoxContainer onlyOneChild={inputSelected === 'title'}>
+        <ToolBoxContent onlyOneChild={inputSelected === 'title'}>
           {inputSelected === 'title' ? (
             <Action onPress={() => focusNextInput('description')}>
               <ActionText>Next</ActionText>
@@ -111,7 +111,7 @@ export default function CreatePost() {
               </Action>
             </>
           )}
-        </ToolBoxContainer>
+        </ToolBoxContent>
       </ToolBox>
     </>
   );

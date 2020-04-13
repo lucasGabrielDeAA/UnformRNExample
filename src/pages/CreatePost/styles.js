@@ -17,7 +17,7 @@ export const TopImage = styled.Image.attrs(() => ({
   width: 300px;
 `;
 
-export const ToolBoxContainer = styled.View`
+export const ToolBoxContent = styled.View`
   align-items: center;
   flex-direction: row;
   justify-content: ${props =>
